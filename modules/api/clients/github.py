@@ -43,7 +43,7 @@ class GitHub:
         return body
     
     def get_rate_limit(self): # перевіряємо скільки запитів до API я ще можу зробити
-         r = requests.get(f"https://api.github.com/rate_limit", headers=self.headers)
+        r = requests.get(f"https://api.github.com/rate_limit", headers=self.headers)
         body = r.json()
         return body
 
