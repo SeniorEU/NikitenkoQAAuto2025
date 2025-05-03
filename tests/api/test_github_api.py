@@ -91,3 +91,16 @@ def test_branch_has_name_and_sha(github_api): # отримуємо всі гіл
     assert 'name' in first_branch
     assert 'commit' in first_branch
     assert 'sha' in first_branch['commit']
+
+@pytest.mark.api
+def test_rate_limit_structure(github_api):  # для початку перевіряємо, що відповідь має ключ 'rate' з інформацією про ліміт
+    r = github_api.get_rate_limit()
+    assert 'rate' in r
+    assert 'remaining' in r['rate']
+
+@pytest.mark.api
+def test_rate_limit_remaining_positive(github_api):  # перевіряємо, скільки запитів у мене ще залишилось до досягнення ліміту
+    r = github_api.get_rate_limit()
+    remaining = r['rate']['remaining']
+    assert isinstance(remaining, int)
+    assert remaining > 0  # при досягнені ліміту може бути 0, якщо перевищено ліміт в 60 запитів за годину
