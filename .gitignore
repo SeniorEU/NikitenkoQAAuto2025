@@ -1,0 +1,36 @@
+Usersivann.sshid_ed25519.pub
+Usersivann.sshid_ed25519.pub
+
+git add .gitignore
+git commit -m "Remove compiled Python files and add .gitignore"
+git push origin main
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.egg-info/
+*.eggs/
+*.env
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secret files
+.env
+*.pem
+*.key
+*.pub
