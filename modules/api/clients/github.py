@@ -46,6 +46,11 @@ class GitHub:
         r = requests.get(f"https://api.github.com/rate_limit", headers=self.headers)
         body = r.json()
         return body
+    
+    def get_authenticated_user(self): # перевіряємо підключення токена через GET-запит і трохи міняємо структуру написання методу
+        url = "https://api.github.com/user"
+        r = requests.get(url, headers=self.headers)
+        return r.json()
 
 
 

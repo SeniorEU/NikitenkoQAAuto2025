@@ -104,3 +104,10 @@ def test_rate_limit_remaining_positive(github_api):  # перевіряємо, �
     remaining = r['rate']['remaining']
     assert isinstance(remaining, int)
     assert remaining > 0  # при досягнені ліміту може бути 0, якщо перевищено ліміт в 60 запитів за годину
+
+@pytest.mark.api
+def test_token_is_connected(github_api): # перевіряємо, що токен підключений і я можу також можу отримати дані про себе
+    user = github_api.get_authenticated_user()
+    print("===> Authenticated user info:", user) # ← хочу бачити інформацію у консолі
+    assert 'login' in user
+    assert user['login'] == 'SeniorEU'
