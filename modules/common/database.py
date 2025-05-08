@@ -69,3 +69,9 @@ class NetflixDB:
         query = "SELECT name FROM sqlite_master WHERE type='table';"
         self.cursor.execute(query)
         return self.cursor.fetchall()
+    
+    def get_table_columns(self, table_name):
+        query = f"PRAGMA table_info({table_name});"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+

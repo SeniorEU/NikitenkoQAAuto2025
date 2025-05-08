@@ -7,8 +7,17 @@ from modules.common.database import NetflixDB
 def test_list_all_tables():
     db = NetflixDB()
     tables = db.get_all_tables()
-    print("Список таблиць у базі:", tables)
+    print("List of tables in the database/Список таблиць у базі:", tables)
 
     assert tables is not None
     assert len(tables) > 0
+
+@pytest.mark.database
+def test_movie_table_columns():
+    db = NetflixDB()
+    columns = db.get_table_columns('movie')
+    print("\nColumns in the ‘movie’ table/Колонки в таблиці 'movie':", columns)
+
+    assert columns is not None
+    assert len(columns) > 0
 
