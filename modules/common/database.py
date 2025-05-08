@@ -63,6 +63,7 @@ class NetflixDB:
     def __init__(self): 
         self.connection = sqlite3.connect(r'C:\Users\ivann\NikitenkoQAAuto2025' + r'\netflixdb.sqlite')        
         self.cursor = self.connection.cursor()
+
     # Test connection to the database.
     # Тестуємо з'єднання з базою даних.  
     def get_all_tables(self):
@@ -70,8 +71,23 @@ class NetflixDB:
         self.cursor.execute(query)
         return self.cursor.fetchall()
     
+    # Add a method to view the table structure.
+    # Додаємо метод для перегляду структури таблиці.
     def get_table_columns(self, table_name):
         query = f"PRAGMA table_info({table_name});"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
+    # Add a method to get the most common locale in the movie table.
+    # Додаємо метод для отримання найбільш поширеної локалі в таблиці movie.    
+    def get_most_common_locale(self):
+        query = """
+            SELECT locale, COUNT(*) as count
+            FROM movie
+            GROUP BY locale
+            ORDER BY count DESC
+            LIMIT 1;
+        """
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
