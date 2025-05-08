@@ -56,3 +56,16 @@ class Database():
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
+
+class NetflixDB:
+    # Create a Netflix class with reference to the netflixdb.sqlite database.
+    # Створюємо клас Netflix з посиланням на базу netflixdb.sqlite.  
+    def __init__(self): 
+        self.connection = sqlite3.connect(r'C:\Users\ivann\NikitenkoQAAuto2025' + r'\netflixdb.sqlite')        
+        self.cursor = self.connection.cursor()
+    # Test connection to the database.
+    # Тестуємо з'єднання з базою даних.  
+    def get_all_tables(self):
+        query = "SELECT name FROM sqlite_master WHERE type='table';"
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
