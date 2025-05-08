@@ -54,3 +54,18 @@ def test_episode_table_columns():
 
     assert columns is not None
     assert len(columns) > 0
+
+# Looking the longest film.
+# Шукаємо найдовший фільм.
+@pytest.mark.database
+def test_longest_movie():
+    db = NetflixDB()
+    result = db.get_longest_movie()
+
+    print("The longest film/Найдовший фільм:", result)
+
+    assert result is not None
+    assert len(result) == 1
+    assert isinstance(result[0][1], int)
+    assert result[0][1] > 0
+

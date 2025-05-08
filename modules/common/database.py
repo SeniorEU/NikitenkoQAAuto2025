@@ -91,3 +91,15 @@ class NetflixDB:
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
+    def get_longest_movie(self):
+        query = """
+            SELECT title, runtime
+            FROM movie
+            ORDER BY runtime DESC
+            LIMIT 1;
+        """
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+
+
+
