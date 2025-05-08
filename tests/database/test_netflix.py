@@ -36,3 +36,21 @@ def test_most_common_locale():
     assert len(result) == 1
     assert result[0][0] != ''
     assert result[0][1] > 0
+
+@pytest.mark.database
+def test_tv_show_table_columns():
+    db = NetflixDB()
+    columns = db.get_table_columns('tv_show')
+    print("\nColumns in the ‘tv_show’ table/Колонки в таблиці 'tv_show':", columns)
+
+    assert columns is not None
+    assert len(columns) > 0
+
+@pytest.mark.database
+def test_episode_table_columns():
+    db = NetflixDB()
+    columns = db.get_table_columns('episode')
+    print("\nColumns in the ‘episode’ table/Колонки в таблиці 'episode':", columns)
+
+    assert columns is not None
+    assert len(columns) > 0
