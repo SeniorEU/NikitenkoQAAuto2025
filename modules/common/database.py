@@ -18,13 +18,7 @@ class Database():
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
-    
-    def get_all_users(self):
-        query = "SELECT name, address, city FROM customers"
-        self.cursor.execute(query)
-        record = self.cursor.fetchall()
-        return record
-    
+  
     def get_user_address_by_name(self, name):
         query = f"SELECT address, city, postalCode, country FROM customers WHERE name = '{name}'"
         self.cursor.execute(query)
