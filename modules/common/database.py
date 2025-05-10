@@ -90,7 +90,9 @@ class NetflixDB:
         """
         self.cursor.execute(query)
         return self.cursor.fetchall()
-
+    
+    # We add a method that returns the name and duration of the longest movie.
+    # Додаємо метод який повертає назву та тривалість найдовшого фільму. 
     def get_longest_movie(self):
         query = """
             SELECT title, runtime
@@ -100,6 +102,52 @@ class NetflixDB:
         """
         self.cursor.execute(query)
         return self.cursor.fetchall()
+    
+    # Add a method that returns the name of all movies and TV shows.
+    # Додаємо метод який повертає назву всіх фільмів та телевізійних шоу.
+    def get_all_titles_union(self):
+        query = """
 
+            SELECT title FROM movie
+            UNION
+            SELECT title FROM tv_show;
+        """
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
+    
+    # Add a method that returns the name and duration of the 10 longest movies.
+    # Додаємо метод який повертає назву та тривалість 10 найдовших фільмів.
+    def get_top_10_longest_movies(self):
+        query = """
+            SELECT title, runtime
+            FROM movie
+            WHERE runtime IS NOT NULL
+            ORDER BY runtime DESC
+            LIMIT 10;
+        """
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
+    # Output the number of television shows (tv_show) that have more than one season
+    # Виводимо кількість телевізійні шоу (tv_show) які мають більше одного сезону
+    def get_tv_shows_with_multiple_seasons(self):
+        query = """
+            SELECT tv_show.title, 
+            COUNT(season.id) as season_count
+            FROM tv_show
+            JOIN season ON tv_show.id = season.tv_show_id
+            GROUP BY tv_show.title
+            HAVING COUNT(season.id) > 1;
+        """
+        self.cursor.execute(query)
+        return self.cursor.fetchall()
 
+# Looking for duplicate film titles
+# Шукаємо дублікати назв фільмів
+    def count_duplicate_movie_titles(self):
+        query = """
+            SELECT COUNT(*) FROM (SELECT title FROM movie GROUP \
+                BY title HAVING COUNT(*) > 1) AS duplicates;
+        """
+        self.cursor.execute(query)
+        return self.cursor.fetchone()[0]
