@@ -4,7 +4,8 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
 
-
+# Page object for the Nova Poshta tracking page | Об'єкт сторінки для сторінки відстеження Нової Пошти
+# This class encapsulates the behavior of the tracking page | Цей клас інкапсулює поведінку сторінки відстеження
 class TrackingPage(BasePage):
     URL = "https://tracking.novaposhta.ua/#/uk"
 
