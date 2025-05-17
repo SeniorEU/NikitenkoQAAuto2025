@@ -4,6 +4,8 @@ from selenium.webdriver.support import expected_conditions as EC
 from modules.ui.page_objects.base_page import BasePage
 import time
 
+# Generating a class for the NASA home page
+# Генеруємо клас для головної сторінки NASA
 class NasaMainPage(BasePage):
     URL = "https://www.nasa.gov/"
 
