@@ -1,50 +1,100 @@
-# GitHub API Tests
-This project contains automated tests for verifying GitHub REST API using `pytest` and `requests`.
+# 🧪 QA Automation Final Project
 
-## 📦 Installation
-1. Clone the repository:
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+This project is a collection of **UI** and **Database** automated tests created for the final assignment of the QA Automation course.
 
-2. (Optional) Create and activate a virtual environment:
-python -m venv venv
-venv\Scripts\activate   # on Windows
-source venv/bin/activate  # on Linux/Mac
-
-3. Install dependencies:
-pip install -r requirements.txt
-
-> If `requirements.txt` is missing, install manually:
-pip install pytest requests python-dotenv
+Tests are written using **Python**, **PyTest**, **Selenium WebDriver**, and **SQLite3**.
 
 ---
-## 🔐 GitHub Token Setup
-1. Create a `.env` file in the project root.
-2. Copy from `.env.example`.
-3. Paste your personal GitHub token:
 
-GITHUB_TOKEN=your_token_here
+## 🌍 UI Tests
 
-> Generate your token here: [GitHub → Developer Settings → Tokens](https://github.com/settings/tokens)
+UI tests use Selenium to simulate user actions and verify functionality across popular websites:
 
-## 🚀 Run Tests
-To run all tests with the `api` marker:
-pytest -m api
+| Site | Description |
+|------|-------------|
+| 🌐 [Wikipedia](https://uk.wikipedia.org/) | Check that Ukrainian Wikipedia has over 1 million articles |
+| 💼 [GitHub](https://github.com/login) | Negative login tests with incorrect credentials |
+| 📦 [Rozetka](https://rozetka.com.ua/) | Login form validation with fake credentials |
+| 🚚 [Nova Poshta] (https://novaposhta.ua/) | Invalid TTN search scenario |
+| 📰 [NYTimes](https://www.nytimes.com/) | Count articles about economy |
+| 🚀 [NASA](https://www.nasa.gov/) | Find article titles related to space topics |
 
-To see extra output in the terminal:
-pytest -m api -s
+---
+
+## 🗄️ Database Tests
+
+Database tests work with **SQLite** databases (e.g., Netflix clone) to verify structure and contents:
+
+| Feature | Description |
+|--------|-------------|
+| 🔎 Tables & Columns | Check for presence of expected tables/columns |
+| 🧍 User Data | Verify user addresses and data structure |
+| 🍿 NetflixDB | Validate movie/TV show metadata, duplicates, longest titles |
+| 📦 Product CRUD | Insert, update, and delete products |
+| 🧾 Orders | Check detailed order data (joins & structure) |
+
+---
 
 ## 📁 Project Structure
-├── modules/
-│   └── api/clients/github.py
-├── tests/
-│   └── api/test_github_api.py
-├── .env.example
-├── .gitignore
-├── pytest.ini
-└── README.md
 
+```
+tests/
+├── ui/
+│   ├── test_ui.py
+│   ├── test_ui_page_object.py
+│   ├── test_rozetka_login.py
+│   ├── test_ui_individual_part.py
+│   ├── test_wikipedia_article_count.py
+│   ├── test_nytimes_economy_articles.py
+│   └── test_nasa_topics.py
+├── database/
+│   ├── test_database.py
+│   └── test_netflix.py
+modules/
+├── ui/page_objects/
+│   └── *.py (Page Object classes)
+├── common/
+│   └── database.py, netflix.py
+```
 
-## 👤 Author
-Ivan Nikitenko  
+---
+
+## ▶️ How to Run Tests
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/qa-final-project.git
+cd qa-final-project
+```
+
+2. Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+3. Run all tests:
+```bash
+pytest -v
+```
+
+4. Run only UI tests:
+```bash
+pytest -m ui
+```
+
+5. Run only database tests:
+```bash
+pytest -m database
+```
+
+---
+
+## 👨‍💻 Author
+
+**Ivan Nikitenko**  
+Student of QA Automation Course  
 GitHub: [SeniorEU](https://github.com/SeniorEU)
+
+---
+
+_Thank you for reviewing my course project!_
