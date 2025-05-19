@@ -15,7 +15,7 @@ UI tests use Selenium to simulate user actions and verify functionality across p
 | 🌐 [Wikipedia](https://uk.wikipedia.org/) | Check that Ukrainian Wikipedia has over 1 million articles |
 | 💼 [GitHub](https://github.com/login) | Negative login tests with incorrect credentials |
 | 📦 [Rozetka](https://rozetka.com.ua/) | Login form validation with fake credentials |
-| 🚚 [Nova Poshta] (https://novaposhta.ua/) | Invalid TTN search scenario |
+| 🚚 [Nova Poshta](https://novaposhta.ua/) | Invalid TTN search scenario |
 | 📰 [NYTimes](https://www.nytimes.com/) | Count articles about economy |
 | 🚀 [NASA](https://www.nasa.gov/) | Find article titles related to space topics |
 
