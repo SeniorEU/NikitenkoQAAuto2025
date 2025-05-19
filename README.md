@@ -21,7 +21,7 @@ UI tests use Selenium to simulate user actions and verify functionality across p
 
 ---
 
-## 🗄️ Database Tests
+## Database Tests
 
 Database tests work with **SQLite** databases (e.g., Netflix clone) to verify structure and contents:
 
