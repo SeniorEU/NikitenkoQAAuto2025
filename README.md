@@ -1,4 +1,4 @@
-# 🧪 QA Automation Final Project
+# QA Automation Final Project
 
 This project is a collection of **UI** and **Database** automated tests created for the final assignment of the QA Automation course.
 
@@ -6,18 +6,18 @@ Tests are written using **Python**, **PyTest**, **Selenium WebDriver**, and **SQ
 
 ---
 
-## 🌍 UI Tests
+## UI Tests
 
 UI tests use Selenium to simulate user actions and verify functionality across popular websites:
 
 | Site | Description |
 |------|-------------|
-| 🌐 [Wikipedia](https://uk.wikipedia.org/) | Check that Ukrainian Wikipedia has over 1 million articles |
-| 💼 [GitHub](https://github.com/login) | Negative login tests with incorrect credentials |
-| 📦 [Rozetka](https://rozetka.com.ua/) | Login form validation with fake credentials |
-| 🚚 [Nova Poshta](https://novaposhta.ua/) | Invalid TTN search scenario |
-| 📰 [NYTimes](https://www.nytimes.com/) | Count articles about economy |
-| 🚀 [NASA](https://www.nasa.gov/) | Find article titles related to space topics |
+| [Wikipedia](https://uk.wikipedia.org/) | Check that Ukrainian Wikipedia has over 1 million articles |
+| [GitHub](https://github.com/login) | Negative login tests with incorrect credentials |
+| [Rozetka](https://rozetka.com.ua/) | Login form validation with fake credentials |
+| [Nova Poshta](https://novaposhta.ua/) | Invalid TTN search scenario |
+| [NYTimes](https://www.nytimes.com/) | Count articles about economy |
+| [NASA](https://www.nasa.gov/) | Find article titles related to space topics |
 
 ---
 
@@ -27,15 +27,15 @@ Database tests work with **SQLite** databases (e.g., Netflix clone) to verify st
 
 | Feature | Description |
 |--------|-------------|
-| 🔎 Tables & Columns | Check for presence of expected tables/columns |
-| 🧍 User Data | Verify user addresses and data structure |
-| 🍿 NetflixDB | Validate movie/TV show metadata, duplicates, longest titles |
-| 📦 Product CRUD | Insert, update, and delete products |
-| 🧾 Orders | Check detailed order data (joins & structure) |
+| Tables & Columns | Check for presence of expected tables/columns |
+| User Data | Verify user addresses and data structure |
+| NetflixDB | Validate movie/TV show metadata, duplicates, longest titles |
+| Product CRUD | Insert, update, and delete products |
+| Orders | Check detailed order data (joins & structure) |
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 tests/
@@ -59,7 +59,7 @@ modules/
 
 ---
 
-## ▶️ How to Run Tests
+## How to Run Tests
 
 1. Clone the repository:
 ```bash
@@ -89,7 +89,7 @@ pytest -m database
 
 ---
 
-## 👨‍💻 Author
+## Author
 
 **Ivan Nikitenko**  
 Student of QA Automation Course  
