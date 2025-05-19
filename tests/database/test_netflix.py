@@ -1,127 +1,139 @@
 import pytest
 from modules.common.database import NetflixDB
 
-# Seeing which tables are present in the netflixdb.sqlite database
-# Дивимося які таблиці присутні в базі netflixdb.sqlite 
+# Check for tables in the database
+# Перевіряємо наявность таблиць у базі
 @pytest.mark.database
-def test_list_all_tables():
+def test_show_tables():
     db = NetflixDB()
     tables = db.get_all_tables()
-    print("List of tables in the database | Список таблиць у базі:", tables)
+
+    print("\033[94mTables:\033[0m \033[93m| Таблиці:\033[0m", tables)
 
     assert tables is not None
     assert len(tables) > 0
 
-# Let's look at the column titles in the ‘Films’ table
-# Дивимося на назви колонок у таблиці 'Films'
+
+# Check the names of the columns in the ‘movie’ table
+# Перевіряємо назви колонок у таблиці 'movie'
 @pytest.mark.database
-def test_movie_table_columns():
+def test_movie_columns():
     db = NetflixDB()
     columns = db.get_table_columns('movie')
-    print("\nColumns in the ‘movie’ table | Колонки в таблиці 'movie':", columns)
 
-    assert columns is not None
+    print("\033[94mMovie columns:\033[0m \033[93m| Колонки таблиці 'movie':\033[0m", columns)
+
+    assert columns
     assert len(columns) > 0
 
-# Looking for the most common language among films.
-# Шукаємо найпоширнішу мову серед фільмів.
+
+# Checking the most frequently used language in movies
+# Перевіряємо найчастіше вживану мову серед фільмів
 @pytest.mark.database
-def test_most_common_locale():
+def test_popular_language():
     db = NetflixDB()
     result = db.get_most_common_locale()
 
-    print("Looking for the most common language among films | Шукаємо найпоширнішу мову серед фільмів:", result)
+    if result:
+        lang, count = result[0]
+        print(f"\033[94mTop language: {lang}, count: {count}\033[0m \033[93m| Найчастіша мова: {lang}, кількість: {count}\033[0m")
+    else:
+        print("\033[91mNo language data found\033[0m \033[93m| Дані по мові відсутні\033[0m")
 
-    assert result is not None
+    assert result
     assert len(result) == 1
-    assert result[0][0] != ''
-    assert result[0][1] > 0
+    assert lang != ''
+    assert count > 0
 
-# Looking at the column titles in the ‘tv_show’ table
-# Дивимося на назви колонок у таблиці 'tv_show'
+# Check the columns of the ‘tv_show’ table
+# Перевіряємо колоноки таблиці 'tv_show'
 @pytest.mark.database
-def test_tv_show_table_columns():
+def test_tv_show_columns():
     db = NetflixDB()
     columns = db.get_table_columns('tv_show')
-    print("\nColumns in the ‘tv_show’ table | Колонки в таблиці 'tv_show':", columns)
 
-    assert columns is not None
+    print("\033[94mTV show columns:\033[0m \033[93m| Колонки таблиці 'tv_show':\033[0m", columns)
+
+    assert columns
     assert len(columns) > 0
 
-# Looking at the column titles in the ‘episode’ table
-# Дивимося на назви колонок у таблиці 'episode'
+# Check the columns of the ‘episode’ table
+# Перевіряємо колоноки таблиці 'episode'
 @pytest.mark.database
-def test_episode_table_columns():
+def test_episode_columns():
     db = NetflixDB()
     columns = db.get_table_columns('episode')
-    print("\nColumns in the ‘episode’ table | Колонки в таблиці 'episode':", columns)
 
-    assert columns is not None
+    print("\033[94mEpisode columns:\033[0m \033[93m| Колонки таблиці 'episode':\033[0m", columns)
+
+    assert columns
     assert len(columns) > 0
 
-# Looking the longest film.
-# Шукаємо найдовший фільм.
+
+# Let's find the longest movie
+# Знайдемо найдовший фільм
 @pytest.mark.database
-def test_longest_movie():
+def test_find_longest_movie():
     db = NetflixDB()
     result = db.get_longest_movie()
 
-    print("The longest film | Найдовший фільм:", result)
+    print("\033[94mLongest movie:\033[0m \033[93m| Найдовший фільм:\033[0m", result)
 
-    assert result is not None
-    assert len(result) == 1
+    assert result
     assert isinstance(result[0][1], int)
     assert result[0][1] > 0
 
-# Movie and TV series titles (combined)
-# Назви фільмів і серіалів (об'єднані)
+
+# Merge all titles from movies and TV shows
+# Об'єднуємо назви фільмів і серіалів
 @pytest.mark.database
-def test_union_all_titles():
+def test_titles_union():
     db = NetflixDB()
-    result = db.get_all_titles_union()
+    all_titles = db.get_all_titles_union()
 
-    print("Movie and TV series titles (combined) | Назви фільмів і серіалів (об'єднані):", result[:10])  
+    print("\033[94mSample titles:\033[0m \033[93m| Приклади назв:\033[0m", all_titles[:10])
 
-    assert result is not None
-    assert len(result) > 0
-    assert isinstance(result[0][0], str)
+    assert all_titles
+    assert isinstance(all_titles[0][0], str)
 
-# Looking 10 for the longest film or show.
-# Шукаємо 10 найдовшхй фільм або шоу.
+
+# Here are the Top 10 longest films or shows
+# Виводимо Топ-10 найдовших фільмів або шоу
 @pytest.mark.database
-def test_top_10_longest_movies():
+def test_top_10_longest():
     db = NetflixDB()
-    result = db.get_top_10_longest_movies()
+    top10 = db.get_top_10_longest_movies()
 
-    print("10 for the longest film or show | 10 найдовших фільмів або шоу:")
-    for i, (title, runtime) in enumerate(result, start=1):
-        print(f"{i}. {title} — {runtime} хв.")
+    print("\033[94mTop 10 longest:\033[0m \033[93m| Топ-10 найдовших:\033[0m")
+    for i, (title, runtime) in enumerate(top10, start=1):
+        print(f"{i}) {title} — {runtime} min | хв")
 
-    assert result is not None
-    assert len(result) == 10
-    for item in result:
-        assert isinstance(item[1], int)
-        assert item[1] > 0
-    
-# Output the number of television shows (tv_show) that have more than one season
-# Виводимо кількість телевізійні шоу (tv_show) які мають більше одного сезону
+    assert top10
+    assert len(top10) == 10
+    for entry in top10:
+        assert entry[1] > 0
+
+
+# Finding series with multiple seasons
+# Знаходимо серіали з кількома сезонами
 @pytest.mark.database
-def test_count_tv_shows_with_multiple_seasons():
+def test_tv_multiple_seasons():
     db = NetflixDB()
-    result = db.get_tv_shows_with_multiple_seasons()
+    shows = db.get_tv_shows_with_multiple_seasons()
 
-    total = len(result)
-    print(f"Number of TV series with more than one season | Кількість серіалів, які мають більше одного сезону: {total}")
+    print("\033[94mShows with >1 season:\033[0m \033[93m| Серіалів з >1 сезоном:\033[0m", len(shows))
 
-    assert result is not None
-    assert total >= 0
+    assert shows is not None
+    assert len(shows) >= 0
 
-# Шукаємо дублікати назв у таблиці movie (однакові значення title) і виводимо кількість
+
+# Find out how many film titles have been duplicated
+# Знаходимо скільки назв фільмів продубльовано
 @pytest.mark.database
-def test_count_duplicate_movie_titles():
+def test_duplicate_movies():
     db = NetflixDB()
-    count = db.count_duplicate_movie_titles()
+    duplicates = db.count_duplicate_movie_titles()
 
-    print(f"Number of duplicate film titles | Кількість дублюющихся назв фільмів: {count}")
+    print("\033[94mDuplicate titles:\033[0m \033[93m| Повторювані назви фільмів:\033[0m", duplicates)
 
-    assert count >= 0
+    assert duplicates >= 0

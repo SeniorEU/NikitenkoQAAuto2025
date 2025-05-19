@@ -50,3 +50,13 @@ def netflix_db():
     db = NetflixDB()
     yield db
     db.close()
+
+# Create a fixture for Rozetka with automatic closing 
+# створюємо фікстуру для Rozetka з автоматичним закриттям
+from modules.ui.page_objects.rozetka_login_page import RozetkaLoginPage
+
+@pytest.fixture
+def rozetka_page():
+    page = RozetkaLoginPage()
+    yield page
+    page.close()

@@ -1,35 +1,26 @@
 import pytest
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from webdriver_manager.chrome import ChromeDriverManager
+from modules.ui.page_objects.rozetka_login_page import RozetkaLoginPage
 
+# UI test for negative login on rozetka.com.ua
+# UI тест для негативного логіну на rozetka.com.ua
 @pytest.mark.ui
-def test_rozetka_invalid_login():
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-    driver.get("https://rozetka.com.ua/")
+def test_rozetka_login_fail():
+    page = RozetkaLoginPage()
+    page.go_to()
 
-    try:
-        wait = WebDriverWait(driver, 10)
+    # Open login window and use email method
+    # Відкриємо вікно входу та скористайтеся методом електронної пошти
+    page.open_login_modal()
+    page.choose_email_login()
 
-        wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.header__button"))).click()
-        wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button.button--small.user-login__button"))).click()
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Інші способи авторизації')]"))).click()
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Увійти через електронну пошту')]"))).click()
+    # Enter wrong email and password
+    # Вводимо неправильну електронну пошту та пароль
+    page.enter_credentials("ivan.nikitenko@mistakeinemail.com", "wrong password")
 
-        wait.until(EC.presence_of_element_located((By.ID, "email"))).send_keys("ua.middle@gmail.com")
-        driver.find_element(By.ID, "password").send_keys("wrong password")
+    # Click the 'Continue' button and wait shortly
+    # Натискаємо кнопку 'Продовжити' та трохи чекаємо 
+    page.submit_login()
 
-        # Натискаємо кнопку
-        btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[contains(text(),'Продовжити')]")))
-        driver.execute_script("arguments[0].click();", btn)
-
-        # Вивід HTML всієї сторінки
-        print("\n\n======= PAGE HTML =======")
-        print(driver.page_source)
-        print("======= END OF PAGE =====\n\n")
-
-    finally:
-        driver.quit()
+    # Close browser
+    # Закриваємо браузер
+    page.close()
