@@ -1,6 +1,6 @@
 # QA Automation Final Project
 
-This project is a collection of **UI** and **Database** automated tests created for the final assignment of the QA Automation course.
+This project is a collection of **UI** and **Database** and **API** automated tests created for the final assignment of the QA Automation course.
 
 Tests are written using **Python**, **PyTest**, **Selenium WebDriver**, and **SQLite3**.
 
@@ -32,6 +32,18 @@ Database tests work with **SQLite** databases (e.g., Netflix clone) to verify st
 | NetflixDB | Validate movie/TV show metadata, duplicates, longest titles |
 | Product CRUD | Insert, update, and delete products |
 | Orders | Check detailed order data (joins & structure) |
+
+---
+
+## API Tests
+
+The API tests are located in the following files:
+
+| Feature | Description |
+|--------|-------------|
+| https://api.github.com/zen | Returns a Zen phrase — used to check server availability |
+| https://api.github.com/users/<username> | Returns user data — validate response fields and status codes |
+| https://httpbin.org/anything | Mock server — used for structured request/response validation |
 
 ---
 
@@ -79,7 +91,6 @@ C:.
 |   +---database
 |   |   |   test_database.py
 |   |   |   test_netflix.py
-|   |   |
 |   |
 |   +---ui
 |   |   |   test_nasa_topics.py
@@ -120,7 +131,10 @@ pytest -s -m ui
 ```bash
 pytest -s -m database
 ```
-
+6. Run only api tests:
+```bash
+pytest -s -m api
+```
 ---
 
 ## Author
