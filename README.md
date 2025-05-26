@@ -38,23 +38,57 @@ Database tests work with **SQLite** databases (e.g., Netflix clone) to verify st
 ## Project Structure
 
 ```
-tests/
-├── ui/
-│   ├── test_ui.py
-│   ├── test_ui_page_object.py
-│   ├── test_rozetka_login.py
-│   ├── test_ui_individual_part.py
-│   ├── test_wikipedia_article_count.py
-│   ├── test_nytimes_economy_articles.py
-│   └── test_nasa_topics.py
-├── database/
-│   ├── test_database.py
-│   └── test_netflix.py
-modules/
-├── ui/page_objects/
-│   └── *.py (Page Object classes)
-├── common/
-│   └── database.py, netflix.py
+C:.
+|
++---chromedriver-win64
+|       chromedriver.exe
+|       LICENSE.chromedriver
+|       THIRD_PARTY_NOTICES.chromedriver
+|
++---config
+|       config.py
+|
++---modules
+|   +---api
+|   |   \---clients
+|   |       |   github.py
+|   |       |   __init__.py
+|   |
+|   +---common
+|   |   |   database.py
+|   |   |   __init__.py
+|   |
+|   \---ui
+|       \---page_objects
+|           |   base_page.py
+|           |   nasa_main_page.py
+|           |   nytimes_main_page.py
+|           |   rozetka_login_page.py
+|           |   sign_in_page.py
+|           |   tracking_page.py
+|           |   wikipedia_main_page.py
+|           |   __init__.py
+|           
++---tests
+|   +---api
+|   |   |   test_api.py
+|   |   |   test_fixtures.py
+|   |   |   test_github_api.py
+|   |   |   test_http.py
+|   |
+|   +---database
+|   |   |   test_database.py
+|   |   |   test_netflix.py
+|   |   |
+|   |
+|   +---ui
+|   |   |   test_nasa_topics.py
+|   |   |   test_nytimes_economy_articles.py
+|   |   |   test_rozetka_login.py
+|   |   |   test_ui.py
+|   |   |   test_ui_individual_part.py
+|   |   |   test_ui_page_object.py
+|   |   |   test_wikipedia_article_count.py
 ```
 
 ---
@@ -63,8 +97,8 @@ modules/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/qa-final-project.git
-cd qa-final-project
+git clone https://github.com/SeniorEU/NikitenkoQAAuto2025.git
+cd NikitenkoQAAuto2025
 ```
 
 2. Install dependencies:
@@ -79,12 +113,12 @@ pytest -v
 
 4. Run only UI tests:
 ```bash
-pytest -m ui
+pytest -s -m ui
 ```
 
 5. Run only database tests:
 ```bash
-pytest -m database
+pytest -s -m database
 ```
 
 ---
