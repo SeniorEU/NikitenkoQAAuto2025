@@ -15,3 +15,5 @@ class BasePage:
     # Close the current browser window (not the whole session)
     def close(self):
         self.driver.close()
+
+        

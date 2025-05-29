@@ -17,6 +17,7 @@ def test_check_incorrect_username_page_object():
     # Check that the page title is what we expect
     assert sign_in_page.check_title("Sign in to GitHub · GitHub")
     print("\033[94mPage title is correct\033[0m")
+
     
     # Close the browser
     sign_in_page.close()

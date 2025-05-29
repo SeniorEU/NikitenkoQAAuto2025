@@ -42,5 +42,6 @@ class TrackingPage(BasePage):
         except TimeoutException:
             print("\033[94mStill no result block after timeout\033[0m")
             return ""
+        
 
            

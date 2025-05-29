@@ -22,3 +22,5 @@ class NasaMainPage(BasePage):
         
         # Return the list of non-empty text values from those elements
         return [el.text for el in elements if el.text.strip()]
+    
+    

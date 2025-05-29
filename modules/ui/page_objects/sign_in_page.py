@@ -34,3 +34,4 @@ class SignInPage(BasePage):
     # check if we are on the “Sign in to GitHub - GitHub” page
     def check_title(self, expected_title):
         return self.driver.title == expected_title
+    

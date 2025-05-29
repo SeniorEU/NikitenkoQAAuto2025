@@ -6,7 +6,7 @@ from modules.ui.page_objects.nasa_main_page import NasaMainPage
 def test_nasa_topic_titles():
     # Keywords we want to find in article titles
     keywords = ["space", "moon", "mars", "earth", "nasa"]
-
+    
     page = NasaMainPage()
     page.go_to()
 

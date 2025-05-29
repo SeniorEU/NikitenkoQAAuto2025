@@ -11,6 +11,7 @@ def test_uk_wikipedia_main_page_count():
     count = page.get_article_count()
     print(f"\033[93m Number of articles on the Ukrainian Wikipedia website: {count}\033[0m ")
 
+
     # Check that the number of articles is greater than 1 million
     assert count > 1_000_000
     page.close()

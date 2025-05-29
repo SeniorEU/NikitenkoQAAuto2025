@@ -28,3 +28,4 @@ class WikipediaStatsPage(BasePage):
         
         # If the number of articles is not found, raise an exception
         raise Exception("\033[91m Could not find the number of articles in the text\033[0m")
+    

@@ -32,7 +32,6 @@ def github_api():
     yield api
 
 # Create a NetflixDB class for testing and pass it to the test function
-# Створюю клас NetflixDB для тестування і передаю його тестовій функції
 class NetflixDB:
     def __init__(self, db_path='netflixdb.sqlite'):
         self.connection = sqlite3.connect(db_path)
@@ -52,7 +51,6 @@ def netflix_db():
     db.close()
 
 # Create a fixture for Rozetka with automatic closing 
-# створюємо фікстуру для Rozetka з автоматичним закриттям
 from modules.ui.page_objects.rozetka_login_page import RozetkaLoginPage
 
 @pytest.fixture

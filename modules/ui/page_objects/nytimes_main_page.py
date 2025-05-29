@@ -21,3 +21,4 @@ class NYTimesMainPage(BasePage):
 
         # For each header, el takes its text content, removes whitespace, filters for empty lines, and returns a clean list of headers
         return [el.text for el in headlines if el.text.strip() != ""]
+    

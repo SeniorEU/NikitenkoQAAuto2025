@@ -25,5 +25,6 @@ def test_economy_news_count():
             print(f"\033[94mTitle:\033[0m {i}. {title}\033[0m")
     else:
         print(f"\033[94mNo economy-related articles found\033[0m ")
+        
 
     page.close()

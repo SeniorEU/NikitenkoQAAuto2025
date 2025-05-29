@@ -34,5 +34,6 @@ def test_check_incorrect_username():
     # Check that the page title is the same as we expect
     assert driver.title == "Sign in to GitHub · GitHub"
 
+
     # Close the browser
     driver.close()

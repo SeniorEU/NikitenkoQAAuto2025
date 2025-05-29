@@ -23,5 +23,6 @@ def test_invalid_ttn_search_page_object():
     # Assert that the result contains at least one of the expected phrases
     assert any(phrase in result for phrase in expected_phrases), f"\033[94m]The result text does not meet expectations\033[0m] {result}"
 
+
     page.close()
 
