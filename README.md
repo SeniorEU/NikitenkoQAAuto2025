@@ -47,51 +47,6 @@ The API tests are located in the following files:
 
 ---
 
-## Project Structure
-
-```
-C:.
-|
-|
-+---modules
-|   +---api
-|   |   \---clients
-|   |       |   github.py
-|   |
-|   +---common
-|   |   |   database.py
-|   |
-|   \---ui
-|       \---page_objects
-|           |   base_page.py
-|           |   nasa_main_page.py
-|           |   nytimes_main_page.py
-|           |   rozetka_login_page.py
-|           |   sign_in_page.py
-|           |   tracking_page.py
-|           |   wikipedia_main_page.py          
-+---tests
-|   +---api
-|   |   |   test_api.py
-|   |   |   test_fixtures.py
-|   |   |   test_github_api.py
-|   |   |   test_http.py
-|   |
-|   +---database
-|   |   |   test_database.py
-|   |   |   test_netflix.py
-|   |
-|   +---ui
-|   |   |   test_nasa_topics.py
-|   |   |   test_nytimes_economy_articles.py
-|   |   |   test_rozetka_login.py
-|   |   |   test_ui.py
-|   |   |   test_ui_individual_part.py
-|   |   |   test_ui_page_object.py
-|   |   |   test_wikipedia_article_count.py
-```
----
-
 ## File .gitattributes
 
 This file was added to the repository to configure Git’s behavior for file handling, specifically:
