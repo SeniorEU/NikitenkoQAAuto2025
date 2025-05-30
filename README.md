@@ -140,7 +140,6 @@ pytest -s -m api
 ```
 C:.
 |
-|
 +---modules
 |   +---api
 |   |   \---clients
@@ -187,5 +186,4 @@ Student of QA Automation Course
 GitHub: [SeniorEU](https://github.com/SeniorEU)
 
 ---
-
 _Thank you for reviewing my course project!_
