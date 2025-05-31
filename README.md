@@ -95,14 +95,6 @@ pytest -s -m api
 ```
 C:.
 |
-+---modules
-|   +---api
-|   |   \---clients
-|   |       |   github.py
-|   |
-|   +---common
-|   |   |   database.py
-|   |
 |   \---ui
 |       \---page_objects
 |           |   base_page.py
