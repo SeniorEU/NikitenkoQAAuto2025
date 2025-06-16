@@ -29,27 +29,27 @@ class RozetkaLoginPage: # Class for Rozetka login page
             EC.element_to_be_clickable((By.CSS_SELECTOR, "button.header__button"))
         )
         profile_icon.click()
-        time.sleep(0.5) # Wait for the login button to be clickable and then click it
+        
         login_btn = self.wait.until(
             EC.element_to_be_clickable((By.CSS_SELECTOR, "button.button--small.user-login__button"))
         )
         self.driver.execute_script("arguments[0].click();", login_btn)
-        time.sleep(0.5) # Wait for the login modal to appear
 
     # Choose email login method
     def choose_email_login(self):
         other_methods = self.wait.until(
             EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Інші способи авторизації')]"))
         )
+        # Click to expand other login options (like email login)
         other_methods.click()
-        time.sleep(0.3)
-
-        # Click on the email login option 
+        # Wait until the "Login with email" option becomes clickable and then select it
         email_login = self.wait.until(
-            EC.presence_of_element_located((By.XPATH, "//span[contains(text(),'Увійти через електронну пошту')]"))
+            EC.element_to_be_clickable((By.XPATH, "//span[contains(text(),'Увійти через електронну пошту')]"))
         )
+
         email_login.click()
-        time.sleep(0.5)
+        # Wait for the email field to be present
+        self.wait.until(EC.presence_of_element_located((By.ID, "email")))         
 
     # Enter email and password 
     def enter_credentials(self, email, password):
@@ -57,8 +57,7 @@ class RozetkaLoginPage: # Class for Rozetka login page
         email_field.send_keys(email)
         password_field = self.driver.find_element(By.ID, "password")
         password_field.send_keys(password)
-        time.sleep(0.5)
-
+    
     # Click the 'Continue' button 
     def submit_login(self):
         submit_btn = self.wait.until(
@@ -66,10 +65,9 @@ class RozetkaLoginPage: # Class for Rozetka login page
         )
         # Scroll to the button and click it
         self.driver.execute_script("arguments[0].scrollIntoView(true);", submit_btn)
-        time.sleep(0.5)
+
         # Click the button using JavaScript to avoid issues with visibility
         self.driver.execute_script("arguments[0].click();", submit_btn)
-        time.sleep(2)
         
     # Close the browser
     def close(self):
