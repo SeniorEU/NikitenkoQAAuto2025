@@ -129,7 +129,7 @@ C:.
 ## Author
 
 **Ivan Nikitenko**  
-Student of QA Automation Course  
+Junior QA Automation Course  
 GitHub: [SeniorEU](https://github.com/SeniorEU)
 
 ---
