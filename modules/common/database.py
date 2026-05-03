@@ -1,50 +1,55 @@
 import sqlite3
+import os
+
+_BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 class Database():
 
-    def __init__(self):        
-        self.connection = sqlite3.connect(r'C:\Users\ivann\NikitenkoQAAuto2025' + r'\become_qa_auto.db')
+    def __init__(self):
+        self.connection = sqlite3.connect(os.path.join(_BASE_DIR, 'become_qa_auto.db'))
         self.cursor = self.connection.cursor()
-    
+
+    def close(self):
+        self.connection.close()
+
     def test_connection(self):
         sqlite_select_Query = "SELECT sqlite_version();"
         self.cursor.execute(sqlite_select_Query)
         record = self.cursor.fetchall()
         print(f"Connected successfully. SQLite Database Version is: {record}")
-    
+
     def get_all_users(self):
         query = "SELECT name, address, city FROM customers"
         self.cursor.execute(query)
         record = self.cursor.fetchall()
         return record
-  
+
     def get_user_address_by_name(self, name):
-        query = f"SELECT address, city, postalCode, country FROM customers WHERE name = '{name}'"
-        self.cursor.execute(query)
+        query = "SELECT address, city, postalCode, country FROM customers WHERE name = ?"
+        self.cursor.execute(query, (name,))
         record = self.cursor.fetchall()
         return record
 
     def update_product_qnt_by_id(self, product_id, qnt):
-        query = f"UPDATE products SET quantity = {qnt} WHERE id = {product_id}"
-        self.cursor.execute(query)
+        query = "UPDATE products SET quantity = ? WHERE id = ?"
+        self.cursor.execute(query, (qnt, product_id))
         self.connection.commit()
 
     def select_product_qnt_by_id(self, product_id):
-        query = f"SELECT quantity FROM products WHERE id = {product_id}"
-        self.cursor.execute(query)
+        query = "SELECT quantity FROM products WHERE id = ?"
+        self.cursor.execute(query, (product_id,))
         record = self.cursor.fetchall()
         return record
-    
+
     def insert_product(self, product_id, name, description, qnt):
-        query = f"INSERT OR REPLACE INTO products (id, name, description, quantity) \
-            VALUES ({product_id}, '{name}', '{description}', {qnt})"
-        self.cursor.execute(query)
+        query = "INSERT OR REPLACE INTO products (id, name, description, quantity) VALUES (?, ?, ?, ?)"
+        self.cursor.execute(query, (product_id, name, description, qnt))
         self.connection.commit()
 
     def delete_product_by_id(self, product_id):
-        query = f"DELETE FROM products WHERE id = {product_id}"
-        self.cursor.execute(query)
+        query = "DELETE FROM products WHERE id = ?"
+        self.cursor.execute(query, (product_id,))
         self.connection.commit()
 
     def get_detailed_orders(self):
@@ -57,25 +62,26 @@ class Database():
         record = self.cursor.fetchall()
         return record
 
+
 class NetflixDB:
-    # Create a Netflix class with reference to the netflixdb.sqlite database.
-    def __init__(self): 
-        self.connection = sqlite3.connect(r'C:\Users\ivann\NikitenkoQAAuto2025' + r'\netflixdb.sqlite')        
+
+    def __init__(self):
+        self.connection = sqlite3.connect(os.path.join(_BASE_DIR, 'netflixdb.sqlite'))
         self.cursor = self.connection.cursor()
 
-    # Test connection to the database.
+    def close(self):
+        self.connection.close()
+
     def get_all_tables(self):
         query = "SELECT name FROM sqlite_master WHERE type='table';"
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
-    # Add a method to view the table structure.
+
     def get_table_columns(self, table_name):
         query = f"PRAGMA table_info({table_name});"
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
-    # Add a method to get the most common locale in the movie table.
+
     def get_most_common_locale(self):
         query = """
             SELECT locale, COUNT(*) as count
@@ -86,8 +92,7 @@ class NetflixDB:
         """
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
-    # We add a method that returns the name and duration of the longest movie.
+
     def get_longest_movie(self):
         query = """
             SELECT title, runtime
@@ -97,19 +102,16 @@ class NetflixDB:
         """
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
-    # Add a method that returns the name of all movies and TV shows.
+
     def get_all_titles_union(self):
         query = """
-
             SELECT title FROM movie
             UNION
             SELECT title FROM tv_show;
         """
         self.cursor.execute(query)
         return self.cursor.fetchall()
-    
-    # Add a method that returns the name and duration of the 10 longest movies.
+
     def get_top_10_longest_movies(self):
         query = """
             SELECT title, runtime
@@ -121,10 +123,9 @@ class NetflixDB:
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
-    # Output the number of television shows (tv_show) that have more than one season
     def get_tv_shows_with_multiple_seasons(self):
         query = """
-            SELECT tv_show.title, 
+            SELECT tv_show.title,
             COUNT(season.id) as season_count
             FROM tv_show
             JOIN season ON tv_show.id = season.tv_show_id
@@ -134,7 +135,6 @@ class NetflixDB:
         self.cursor.execute(query)
         return self.cursor.fetchall()
 
-# Looking for duplicate film titles
     def count_duplicate_movie_titles(self):
         query = """
             SELECT COUNT(*) FROM (SELECT title FROM movie GROUP \

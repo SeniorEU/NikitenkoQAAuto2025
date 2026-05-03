@@ -1,11 +1,11 @@
 import pytest
 from modules.common.database import NetflixDB
 
-# Check for tables in the database
 @pytest.mark.database
 def test_show_tables():
     db = NetflixDB()
     tables = db.get_all_tables()
+    db.close()
 
     print("\033[94mTables:\033[0m", tables)
 
@@ -13,11 +13,11 @@ def test_show_tables():
     assert len(tables) > 0
 
 
-# Check the names of the columns in the ‘movie’ table
 @pytest.mark.database
 def test_movie_columns():
     db = NetflixDB()
     columns = db.get_table_columns('movie')
+    db.close()
 
     print("\033[94mMovie columns:\033[0m", columns)
 
@@ -25,11 +25,11 @@ def test_movie_columns():
     assert len(columns) > 0
 
 
-# Checking the most frequently used language in movies
 @pytest.mark.database
 def test_popular_language():
     db = NetflixDB()
     result = db.get_most_common_locale()
+    db.close()
 
     if result:
         lang, count = result[0]
@@ -42,22 +42,24 @@ def test_popular_language():
     assert lang != ''
     assert count > 0
 
-# Check the columns of the ‘tv_show’ table
+
 @pytest.mark.database
 def test_tv_show_columns():
     db = NetflixDB()
     columns = db.get_table_columns('tv_show')
+    db.close()
 
     print("\033[94mTV show columns:\033[0m", columns)
 
     assert columns
     assert len(columns) > 0
 
-# Check the columns of the ‘episode’ table
+
 @pytest.mark.database
 def test_episode_columns():
     db = NetflixDB()
     columns = db.get_table_columns('episode')
+    db.close()
 
     print("\033[94mEpisode columns:\033[0m", columns)
 
@@ -65,11 +67,11 @@ def test_episode_columns():
     assert len(columns) > 0
 
 
-# Let's find the longest movie
 @pytest.mark.database
 def test_find_longest_movie():
     db = NetflixDB()
     result = db.get_longest_movie()
+    db.close()
 
     print("\033[94mLongest movie:\033[0m", result)
 
@@ -78,11 +80,11 @@ def test_find_longest_movie():
     assert result[0][1] > 0
 
 
-# Merge all titles from movies and TV shows
 @pytest.mark.database
 def test_titles_union():
     db = NetflixDB()
     all_titles = db.get_all_titles_union()
+    db.close()
 
     print("\033[94mSample titles:\033[0m", all_titles[:10])
 
@@ -90,11 +92,11 @@ def test_titles_union():
     assert isinstance(all_titles[0][0], str)
 
 
-# Here are the Top 10 longest films or shows
 @pytest.mark.database
 def test_top_10_longest():
     db = NetflixDB()
     top10 = db.get_top_10_longest_movies()
+    db.close()
 
     print("\033[94mTop 10 longest:\033[0m")
     for i, (title, runtime) in enumerate(top10, start=1):
@@ -106,11 +108,11 @@ def test_top_10_longest():
         assert entry[1] > 0
 
 
-# Finding series with multiple seasons
 @pytest.mark.database
 def test_tv_multiple_seasons():
     db = NetflixDB()
     shows = db.get_tv_shows_with_multiple_seasons()
+    db.close()
 
     print("\033[94mShows with >1 season:\033[0m", len(shows))
 
@@ -118,11 +120,11 @@ def test_tv_multiple_seasons():
     assert len(shows) >= 0
 
 
-# Find out how many film titles have been duplicated
 @pytest.mark.database
 def test_duplicate_movies():
     db = NetflixDB()
     duplicates = db.count_duplicate_movie_titles()
+    db.close()
 
     print("\033[94mDuplicate titles:\033[0m", duplicates)
 

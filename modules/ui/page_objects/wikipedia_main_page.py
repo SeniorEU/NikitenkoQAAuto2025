@@ -1,3 +1,4 @@
+import re
 from modules.ui.page_objects.base_page import BasePage
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -19,8 +20,7 @@ class WikipediaStatsPage(BasePage):
         )
         full_text = content.text
         
-        # Extract the number of articles using a regular expression 
-        import re
+        # Extract the number of articles using a regular expression
         match = re.search(r"\)\s*([0-9\u00a0\s]+)", full_text)
         if match:
             number_text = match.group(1).replace(" ", "").replace("\xa0", "")

@@ -5,18 +5,20 @@ from modules.common.database import Database
 def test_database_connection():
     db = Database()
     db.test_connection()
+    db.close()
 
 @pytest.mark.database
 def test_check_all_users():
     db = Database()
     users = db.get_all_users()
-
     print(users)
+    db.close()
 
 @pytest.mark.database
 def test_check_user_sergii():
     db = Database()
     user = db.get_user_address_by_name('Sergii')
+    db.close()
 
     assert user[0][0] == 'Maydan Nezalezhnosti 1'
     assert user[0][1] == 'Kyiv'
@@ -28,6 +30,7 @@ def test_product_qnt_update():
     db = Database()
     db.update_product_qnt_by_id(1, 25)
     water_qnt = db.select_product_qnt_by_id(1)
+    db.close()
 
     assert water_qnt[0][0] == 25
 
@@ -36,6 +39,7 @@ def test_product_insert():
     db = Database()
     db.insert_product(4, 'печиво', 'солодке', 30)
     water_qnt = db.select_product_qnt_by_id(4)
+    db.close()
 
     assert water_qnt[0][0] == 30
 
@@ -45,6 +49,7 @@ def test_product_delete():
     db.insert_product(99, 'тестові', 'дані', 999)
     db.delete_product_by_id(99)
     qnt = db.select_product_qnt_by_id(99)
+    db.close()
 
     assert len(qnt) == 0
 
@@ -52,13 +57,12 @@ def test_product_delete():
 def test_detailed_orders():
     db = Database()
     orders = db.get_detailed_orders()
+    db.close()
+
     print("Замовлення", orders)
-    # Check quantity of orders equal to 1
     assert len(orders) == 1
 
-    # Check structure of data
     assert orders[0][0] == 1
     assert orders[0][1] == 'Sergii'
     assert orders[0][2] == 'солодка вода'
     assert orders[0][3] == 'з цукром'
-    

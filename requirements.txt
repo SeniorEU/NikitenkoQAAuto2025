@@ -4,3 +4,7 @@ packaging==25.0
 pluggy==1.6.0
 Pygments==2.19.2
 pytest==8.4.1
+selenium==4.33.0
+webdriver-manager
+requests
+python-dotenv

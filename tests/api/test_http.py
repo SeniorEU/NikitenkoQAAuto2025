@@ -5,18 +5,17 @@ import requests
 @pytest.mark.http
 def test_first_request():
     r = requests.get('https://api.github.com/zen')
-    print(f"Response is{r.text}")
+    print(f"Response is: {r.text}")
 
 # Checking that the user ‘defunkt’ has the correct name and reply title
 @pytest.mark.http
 def test_second_request():
     r = requests.get('https://api.github.com/users/defunkt')
     body = r.json()
-    headers = r.headers
 
     assert body['name'] == 'Chris Wanstrath'
     assert r.status_code == 200
-    assert headers['Server'] == 'github.com'
+    assert r.headers['Server'] == 'github.com'
 
 # Checking that a request to a non-existent user gives a 404
 @pytest.mark.http
